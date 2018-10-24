@@ -3,7 +3,7 @@ package ru.javawebinar.topjava.web;
 import org.junit.*;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.javawebinar.topjava.UserTestData;
+import ru.javawebinar.topjava.testdata.UserTestData;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepositoryImpl;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -12,7 +12,7 @@ import ru.javawebinar.topjava.web.user.AdminRestController;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static ru.javawebinar.topjava.UserTestData.ADMIN;
+import static ru.javawebinar.topjava.testdata.UserTestData.ADMIN;
 
 public class InMemoryAdminRestControllerTest {
     private static ConfigurableApplicationContext appCtx;
@@ -20,7 +20,9 @@ public class InMemoryAdminRestControllerTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-test.xml", "spring/spring-db.xml");
+        appCtx = new ClassPathXmlApplicationContext(
+                "spring/spring-app.xml",
+                "spring/spring-test.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = appCtx.getBean(AdminRestController.class);
     }
