@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava;
+package ru.javawebinar.topjava.testdata;
 
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
@@ -15,8 +15,10 @@ public class UserTestData {
     public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", Role.ROLE_USER);
     public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN);
 
+    public static final String[] FIELDS_TO_IGNORE = {"registered", "roles"};
+
     public static void assertMatch(User actual, User expected) {
-        assertThat(actual).isEqualToIgnoringGivenFields(expected, "registered", "roles");
+        assertThat(actual).isEqualToIgnoringGivenFields(expected, FIELDS_TO_IGNORE);
     }
 
     public static void assertMatch(Iterable<User> actual, User... expected) {
@@ -24,6 +26,6 @@ public class UserTestData {
     }
 
     public static void assertMatch(Iterable<User> actual, Iterable<User> expected) {
-        assertThat(actual).usingElementComparatorIgnoringFields("registered", "roles").isEqualTo(expected);
+        assertThat(actual).usingElementComparatorIgnoringFields(FIELDS_TO_IGNORE).isEqualTo(expected);
     }
 }
