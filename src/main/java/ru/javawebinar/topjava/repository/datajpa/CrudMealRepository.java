@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional(readOnly = true)
 public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
 
     @Transactional
@@ -19,7 +20,7 @@ public interface CrudMealRepository extends JpaRepository<Meal, Integer> {
     int delete(@Param("id") int id, @Param("user_id") int user_id);
 
     @Transactional
-    Meal save (Meal meal, int userId);
+    Meal save(Meal meal, int userId);
 
     Optional<Meal> findByIdAndUserId(int id, int userId);
 
